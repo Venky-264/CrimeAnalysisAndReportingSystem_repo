@@ -1,5 +1,5 @@
 package com.enums;
 
 public enum Status {
-	OPEN,CLOSED,INVESTIGATION;
+	OPEN,CLOSED,INVESTIGATION,PENDING;
 }
