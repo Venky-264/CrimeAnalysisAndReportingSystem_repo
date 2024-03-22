@@ -23,13 +23,14 @@ public class IncidentController {
 		Scanner sc = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("press 1.for displaying all incidents ");
-			System.out.println("press 2.to insert a new incident");
-			System.out.println("press 3.for updating the status of a specific incident");
-			System.out.println("press 4. for displaying incidents withing specific dates");
-			System.out.println("press 5. to search an incident of a specific type");
-			System.out.println("press 6. generate report for an incident");
-			System.out.println("press 0. to exit...");
+			
+			System.out.println("Select an operation to perform");
+			System.out.println("Press 1. For displaying all incidents ");
+			System.out.println("Press 2. To insert a new incident");
+			System.out.println("Press 3. For displaying incidents with in the given range");
+			System.out.println("Press 4. For displaying incidents based on their Incident Criteria");
+			System.out.println("Press 5. Generate report for an incident");
+			System.out.println("Press 0. To Terminate...");
 			int choice = sc.nextInt();
 			sc.nextLine();
 			if (choice == 0) {
@@ -80,12 +81,15 @@ public class IncidentController {
 				System.out.println("press 1. For Open");
 				System.out.println("press 2. For Closed");
 				System.out.println("press 3. For Investigating");
+				System.out.println("press 4. For Pending");
 				int y = sc.nextInt();
 				if(y == 1) i.setStatus(Status.OPEN);
 				if(y == 2) i.setStatus(Status.CLOSED);
-				if(y == 3) i.setStatus(Status.INVESTIGATING);
+				if(y == 3) i.setStatus(Status.INVESTIGATION);
+				if(y == 4) i.setStatus(Status.PENDING);
 				System.out.println("Enter the Officer In-Charger of the Incident");
 				i.setOfficerId(sc.nextInt());
+				System.out.println(i.toString());
 				incidentService.createIncident(i);
 				break;
 			case 3:
@@ -115,8 +119,6 @@ public class IncidentController {
 				break;
 			case 5:
 				
-				break;
-			case 6:
 				break;
 			default:
 				System.out.println("invalid option");
