@@ -100,6 +100,8 @@ public class ReportController {
 					
 				}catch (Exception e) {e.printStackTrace();}
 				break;
+			default:
+				System.out.println("invalid option");
 			
 			}
 				
