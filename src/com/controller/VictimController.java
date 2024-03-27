@@ -3,10 +3,13 @@ package com.controller;
 
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.Scanner;
 
+import com.exceptions.InvalidIncidentDataException;
+import com.exceptions.InvalidVictimDataException;
 import com.model.Victim;
 import com.service.VictimService;
 
@@ -29,25 +32,28 @@ public class VictimController {
 			switch(in)
 			{
 			case 1:
-				
+				System.out.println("Inserting values");
 				System.out.println("Enter firstName:");
 				String firstName=sc.next();
 				System.out.println("Enter lastName:");
 				String lastName=sc.next();
 				System.out.println("Enter dob:");
-				String dob=sc.next();
+				String dobString = sc.next();
+				LocalDate dob = LocalDate.parse(dobString);
+							
 				System.out.println("Enter gender:");
 				String gender=sc.next();
 				System.out.println("Enter phone no:");
 				String contactInfo=sc.next();
 				System.out.println("Enter incident id:");
 				int incidentId=sc.nextInt();
+				Victim victim=new Victim(firstName,lastName,dob,gender,contactInfo,incidentId);
 				try {
-					victimService.addRecord(firstName,lastName,dob,gender,contactInfo,incidentId);
+					victimService.addRecord(victim);
 					System.out.println("inserted successfully");
-				} catch (ClassNotFoundException | SQLException e) {
+				} catch (ClassNotFoundException | SQLException | InvalidIncidentDataException e) {
 					System.out.println(e.getMessage());
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				break;
 			case 2:
@@ -56,9 +62,9 @@ public class VictimController {
 				int id2=sc.nextInt();
 				try {
 					victimService.deleteVictim(id2);
-				} catch (ClassNotFoundException | SQLException e1) {
+				} catch (ClassNotFoundException | SQLException | InvalidVictimDataException e1) {
 					System.out.println(e1.getMessage());
-					e1.printStackTrace();
+					
 				}
 
 				break;
@@ -83,10 +89,10 @@ public class VictimController {
 					
 				} catch (ClassNotFoundException e) {
 					System.out.println(e.getMessage());
-					e.printStackTrace();
+					
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
-					e.printStackTrace();
+					
 				}
 				
 				break;
@@ -108,16 +114,18 @@ public class VictimController {
 					}
 				} catch (ClassNotFoundException e) {
 					System.out.println(e.getMessage());
-					e.printStackTrace();
+					
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
-					e.printStackTrace();
+					
 				}
 				break;
 			default:
 				System.out.println("Invalid Input");
 			}
 		}
+		sc.close();
 	}
+	
 
 }
