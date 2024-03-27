@@ -130,5 +130,38 @@ public class OfficerServiceTest {
 			Assert.assertEquals("invalid incidentId".toUpperCase(), e.getMessage().toUpperCase());
 		}
 	}
+	
+	@Test
+	public void deleteOfficerTest() {
+		
+		OfficerService officerService=new OfficerService();
+		
+		/* deleting officer usecase1 */
+		try {
+			Assert.assertEquals(0, officerService.deleteOfficer(24));
+		} catch (ClassNotFoundException | SQLException e) {
+			
+		}
+	}
+	
+	@Test
+	public void assignOfficerToIncidentTest() {
+		
+		OfficerService officerService=new OfficerService();
+		
+		/*assigning officer who exists usecase1 */
+		try {
+			Assert.assertEquals(1, officerService.assignOfficerToIncident(2,1));
+		} catch (ClassNotFoundException | SQLException e) {
+			
+		}
+		
+		/*assigning officer who does not exists usecase2 */
+		try {
+			Assert.assertEquals(0, officerService.assignOfficerToIncident(2,50));
+		} catch (ClassNotFoundException | SQLException e) {
+			
+		}
+	}
 
 }
