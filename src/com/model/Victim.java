@@ -1,13 +1,15 @@
 package com.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
+import java.util.Objects;
 
 public class Victim {
 	
 	private int victimId;
 	private String firstName;
 	private String lastName;
-	private Date dob;
+	private LocalDate dob;
 	private String gender;
 	private String contactNumber;
 	private int incidentId;
@@ -16,7 +18,7 @@ public class Victim {
 	public Victim() {  }
 
 
-	public Victim(String firstName, String lastName, Date dob, String gender, String contactNumber, int incidentId) {
+	public Victim(String firstName, String lastName, LocalDate dob, String gender, String contactNumber, int incidentId) {
 	
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -28,7 +30,7 @@ public class Victim {
 
 
 
-	public Victim(int victimId, String firstName, String lastName, Date dob, String gender, String contactNumber,
+	public Victim(int victimId, String firstName, String lastName, LocalDate dob, String gender, String contactNumber,
 			int incidentId) {
 		
 		this.victimId = victimId;
@@ -71,12 +73,12 @@ public class Victim {
 	}
 
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
@@ -98,6 +100,28 @@ public class Victim {
 
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(contactNumber, dob, firstName, gender, incidentId, lastName, victimId);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Victim other = (Victim) obj;
+		return Objects.equals(contactNumber, other.contactNumber) && Objects.equals(dob, other.dob)
+				&& Objects.equals(firstName, other.firstName) && Objects.equals(gender, other.gender)
+				&& incidentId == other.incidentId && Objects.equals(lastName, other.lastName)
+				&& victimId == other.victimId;
 	}
 
 
